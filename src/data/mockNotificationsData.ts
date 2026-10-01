@@ -1,0 +1,121 @@
+import { MessageTemplate, DispatchedMessageLog } from '../types/notifications';
+
+export const initialMessageTemplates: MessageTemplate[] = [
+  {
+    id: 'tpl-1',
+    name: 'Lembrete de Consulta 24 Horas Antes',
+    triggerType: 'reminder_24h',
+    title: 'Lembrete de Sessão de Fisioterapia - PhysioClinic',
+    content:
+      'Olá, {{paciente}}! Lembramos que sua sessão de {{servico}} com {{fisioterapeuta}} está agendada para amanhã, {{data}} às {{horario}} no {{sala}}. Por favor, confirme sua presença clicando no link abaixo ou pelo aplicativo.',
+    availableVariables: ['{{paciente}}', '{{servico}}', '{{fisioterapeuta}}', '{{data}}', '{{horario}}', '{{sala}}'],
+    channel: 'push',
+    isActive: true,
+    timingDescription: 'Disparo automático 24 horas antes do horário da consulta',
+  },
+  {
+    id: 'tpl-2',
+    name: 'Lembrete Rápido 2 Horas Antes',
+    triggerType: 'reminder_2h',
+    title: 'Sua consulta é daqui a 2 horas!',
+    content:
+      'Olá, {{paciente}}! Sua sessão de fisioterapia é hoje às {{horario}} no {{sala}} com {{fisioterapeuta}}. Estamos te aguardando na Av. Paulista, 1842 - Conj. 1204!',
+    availableVariables: ['{{paciente}}', '{{fisioterapeuta}}', '{{horario}}', '{{sala}}'],
+    channel: 'sms',
+    isActive: true,
+    timingDescription: 'Disparo automático 2 horas antes da consulta',
+  },
+  {
+    id: 'tpl-3',
+    name: 'Confirmação Imediata de Agendamento',
+    triggerType: 'booking_confirmation',
+    title: 'Consulta Agendada com Sucesso - PhysioClinic',
+    content:
+      'Olá, {{paciente}}! Seu agendamento para {{servico}} com {{fisioterapeuta}} foi realizado com sucesso para o dia {{data}} às {{horario}}.',
+    availableVariables: ['{{paciente}}', '{{servico}}', '{{fisioterapeuta}}', '{{data}}', '{{horario}}'],
+    channel: 'email',
+    isActive: true,
+    timingDescription: 'Disparo imediato após a conclusão do agendamento',
+  },
+  {
+    id: 'tpl-4',
+    name: 'Orientações Pré-Avaliação Fisioterapêutica',
+    triggerType: 'pre_assessment_prep',
+    title: 'Orientações Importantes para sua Avaliação Inicial',
+    content:
+      'Prezado(a) {{paciente}}, para sua avaliação fisioterapêutica inicial recomendamos trajes confortáveis de ginástica (bermuda, legging ou top) para livre inspeção postural e testes de movimento. Traga exames de imagem prévios (Ressonâncias, Tomografias ou Raio-X).',
+    availableVariables: ['{{paciente}}', '{{fisioterapeuta}}', '{{data}}'],
+    channel: 'email',
+    isActive: true,
+    timingDescription: 'Disparo imediato ao agendar uma primeira avaliação',
+  },
+  {
+    id: 'tpl-5',
+    name: 'Aviso de Cancelamento e Liberação',
+    triggerType: 'cancellation_notice',
+    title: 'Agendamento Cancelado - PhysioClinic',
+    content:
+      'Olá, {{paciente}}. Confirmamos o cancelamento da sua sessão de {{data}} às {{horario}}. O horário foi liberado em nossa agenda. Para remarcar, utilize o aplicativo a qualquer momento.',
+    availableVariables: ['{{paciente}}', '{{data}}', '{{horario}}'],
+    channel: 'push',
+    isActive: true,
+    timingDescription: 'Disparo no momento em que um cancelamento é processado',
+  },
+  {
+    id: 'tpl-6',
+    name: 'Novos Exercícios Domiciliares Prescritos',
+    triggerType: 'home_exercises_update',
+    title: 'Novos Exercícios Prescritos no seu App',
+    content:
+      'Olá, {{paciente}}! O {{fisioterapeuta}} prescreveu novos exercícios domiciliares para acelerar sua recuperação. Acesse o Portal do Paciente para ver as instruções biomecânicas e de respiração.',
+    availableVariables: ['{{paciente}}', '{{fisioterapeuta}}'],
+    channel: 'push',
+    isActive: true,
+    timingDescription: 'Disparo ao salvar uma nova evolução ou conduta de exercícios',
+  },
+];
+
+export const initialDispatchedLogs: DispatchedMessageLog[] = [
+  {
+    id: 'log-1',
+    recipientName: 'Carlos Eduardo Santos',
+    recipientContact: '(11) 98765-4321',
+    templateName: 'Lembrete de Consulta 24 Horas Antes',
+    sentAt: 'Hoje às 08:00',
+    channel: 'push',
+    status: 'confirmed',
+    patientConfirmationResponse: 'confirmed',
+    previewText: 'Olá, Carlos Eduardo! Lembramos que sua sessão de Reabilitação Traumato-Ortopédica...',
+  },
+  {
+    id: 'log-2',
+    recipientName: 'Beatriz Almeida',
+    recipientContact: '(11) 97654-3210',
+    templateName: 'Lembrete de Consulta 24 Horas Antes',
+    sentAt: 'Hoje às 07:30',
+    channel: 'sms',
+    status: 'delivered',
+    previewText: 'Olá, Beatriz! Lembramos que sua sessão de Cinesioterapia com Dr. Lucas Silveira...',
+  },
+  {
+    id: 'log-3',
+    recipientName: 'Juliana Mendes Ribeiro',
+    recipientContact: '(11) 96543-2109',
+    templateName: 'Lembrete de Consulta 24 Horas Antes',
+    sentAt: 'Ontem às 18:00',
+    channel: 'push',
+    status: 'confirmed',
+    patientConfirmationResponse: 'confirmed',
+    previewText: 'Olá, Juliana! Lembramos que sua sessão de RPG com Dra. Camila Ramos...',
+  },
+  {
+    id: 'log-4',
+    recipientName: 'Roberto Alves de Oliveira',
+    recipientContact: '(11) 95432-1098',
+    templateName: 'Orientações Pré-Avaliação Fisioterapêutica',
+    sentAt: 'Ontem às 14:15',
+    channel: 'email',
+    status: 'delivered',
+    previewText: 'Prezado Roberto, para sua avaliação fisioterapêutica inicial recomendamos trajes...',
+  },
+];

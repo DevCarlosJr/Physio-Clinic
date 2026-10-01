@@ -1,0 +1,6 @@
+{
+  "name": "PhysioClinic - Gestão para Clínicas de Fisioterapia",
+  "description": "Sistema SaaS profissional e moderno para gestão clínica, agenda, pacientes, avaliações e prontuário fisioterapêutico.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
